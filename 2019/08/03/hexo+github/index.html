@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/moon.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/moon.32px.ico?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/moon.16px.ico?v=7.3.0">
+  <link rel="mask-icon" href="/images/moon.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="从写同人文到码代码, 一直想做一个个站, 但是并没有这方面的经验, 所以参考知乎文章自己试了一下, 并且根据使用的 Hexo 模板 NexT 的官方文档进行了一些常规设置.  总而言之是一个傻瓜教程, 给诸位饱受屏蔽的姐妹们一个方向. 我也依旧在摸索中, 欢迎一起讨论在使用过程中碰到的疑难w 这篇教程是 Windows 教程, 如果是 Mac 用户可以将之后的 Git Bash 中的操作替换为">
+<meta name="keywords" content="Hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo + Github 搭建个人网站">
+<meta property="og:url" content="http://yoursite.com/2019/08/03/hexo+github/index.html">
+<meta property="og:site_name" content="Shinkoya">
+<meta property="og:description" content="从写同人文到码代码, 一直想做一个个站, 但是并没有这方面的经验, 所以参考知乎文章自己试了一下, 并且根据使用的 Hexo 模板 NexT 的官方文档进行了一些常规设置.  总而言之是一个傻瓜教程, 给诸位饱受屏蔽的姐妹们一个方向. 我也依旧在摸索中, 欢迎一起讨论在使用过程中碰到的疑难w 这篇教程是 Windows 教程, 如果是 Mac 用户可以将之后的 Git Bash 中的操作替换为">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-04T04:40:26.803Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo + Github 搭建个人网站">
+<meta name="twitter:description" content="从写同人文到码代码, 一直想做一个个站, 但是并没有这方面的经验, 所以参考知乎文章自己试了一下, 并且根据使用的 Hexo 模板 NexT 的官方文档进行了一些常规设置.  总而言之是一个傻瓜教程, 给诸位饱受屏蔽的姐妹们一个方向. 我也依旧在摸索中, 欢迎一起讨论在使用过程中碰到的疑难w 这篇教程是 Windows 教程, 如果是 Mac 用户可以将之后的 Git Bash 中的操作替换为">
+  <link rel="canonical" href="http://yoursite.com/2019/08/03/hexo+github/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Hexo + Github 搭建个人网站 | Shinkoya</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shinkoya</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+    </ul>
+    
+
+</nav>
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/03/hexo+github/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shinko">
+      <meta itemprop="description" content="I had a crush on them.">
+      <meta itemprop="image" content="/images/shinko.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shinkoya">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">Hexo + Github 搭建个人网站
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-03 18:32:11" itemprop="dateCreated datePublished" datetime="2019-08-03T18:32:11+08:00">2019-08-03</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-08-04 12:40:26" itemprop="dateModified" datetime="2019-08-04T12:40:26+08:00">2019-08-04</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Websites/" itemprop="url" rel="index"><span itemprop="name">Websites</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon"
+              >
+                <i class="fa fa-eye"></i>
+                 Views:  
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          <br>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span title="Symbols count in article">5.4k</span>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              
+              <span title="Reading time">5 mins.</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>从写同人文到码代码, 一直想做一个个站, 但是并没有这方面的经验, 所以参考<a href="https://zhuanlan.zhihu.com/p/26625249" target="_blank" rel="noopener">知乎文章</a>自己试了一下, 并且根据使用的 Hexo 模板 <a href="https://theme-next.org/docs/" target="_blank" rel="noopener">NexT 的官方文档</a>进行了一些常规设置. </p>
+<p>总而言之是一个傻瓜教程, 给诸位饱受屏蔽的姐妹们一个方向. 我也依旧在摸索中, 欢迎一起讨论在使用过程中碰到的疑难w</p>
+<p>这篇教程是 Windows 教程, 如果是 Mac 用户可以将之后的 Git Bash 中的操作替换为 Terminal 中直接进行, 基本类似, node 和 git 可通过 homebrew 下载 (可搜索相关教程, 这里不再累述).</p>
+</blockquote>
+<h2 id="Windows-准备工作-Preparation-for-Windows"><a href="#Windows-准备工作-Preparation-for-Windows" class="headerlink" title="Windows 准备工作 / Preparation for Windows"></a>Windows 准备工作 / Preparation for Windows</h2><ol>
+<li><p>安装<a href="https://nodejs.org/dist/v12.7.0/node-v12.7.0-x64.msi" target="_blank" rel="noopener"> NodeJS </a></p>
+<ul>
+<li>命令行验证安装:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node -v <span class="comment"># 将显示 node 版本号</span></span><br><span class="line">$ npm -v <span class="comment"># 将显示 npm 版本号</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>安装<a href="https://git-scm.com/download/win" target="_blank" rel="noopener"> Git </a></p>
+<ul>
+<li>命令行验证安装:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="comment"># 将显示所有 git 命令</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>一个 <a href="https://github.com/" target="_blank" rel="noopener">Github 账号</a>, 若没有可注册一个 (注册后需要及时验证邮箱)</p>
+</li>
+</ol>
+<h2 id="Git-配置-Git-Setting"><a href="#Git-配置-Git-Setting" class="headerlink" title="Git 配置 / Git Setting"></a>Git 配置 / Git Setting</h2><p>我个人经常看的 Git 教程是<a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">廖雪峰老师的这篇</a>.但是实际上我们在搭建过程中并不需要了解那么多x. </p>
+<ol>
+<li><p>打开 Git Bash, 执行如下命令:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 请自行替换以下双引号中的内容</span></span><br><span class="line">$ git config --global user.name <span class="string">"你的GitHub用户名"</span></span><br><span class="line">$ git config --global user.email <span class="string">"你的GitHub注册邮箱"</span></span><br><span class="line"></span><br><span class="line">$ ssh-keygen -t rsa -C <span class="string">"你的GitHub注册邮箱"</span> <span class="comment"># 之后一直回车结束, 默认不为密钥设置密码</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开执行 <code>ssh-keygen</code> 命令的路径 (它会显示在你的 Git Bash 窗口最上面), 在路径后加上 <code>\.ssh</code> 进入隐藏的文件夹 (完整的路径名一般默认是<code>C:\Users\username\.ssh</code>, 其中 username 是你的主机的当前用户名), 使用不是记事本的记事本工具 (比如 notepad, notepad++, sublime, 甚至vscode, 建议装一个 vscode, 后续的文章编写也方便使用它编辑), 打开 id_rsa.pub, 并复制全部内容.</p>
+</li>
+<li><p>登录 Github 到<a href="https://github.com/settings/keys" target="_blank" rel="noopener">设置</a>里, 点击 <code>New SSH key</code>, title 可以随便设置, key 里面把刚刚复制的内容粘贴进去, 并点击 <code>Add SSH key</code> 确认.</p>
+</li>
+<li><p>回到 Git Bash, 通过命令 <code>ssh git@github.com</code>查看 SSH 是否设置成功. 如成功应当显示如下内容:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ssh git@github.com</span><br><span class="line">PTY allocation request failed on channel 0</span><br><span class="line">Hi shinko1998! You<span class="string">'ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="安装-Hexo-Installation-of-Hexo"><a href="#安装-Hexo-Installation-of-Hexo" class="headerlink" title="安装 Hexo / Installation of Hexo"></a>安装 Hexo / Installation of Hexo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br><span class="line"><span class="comment"># 等待完成后继续执行初始化, 其中 blog 可替换为任意你希望使用的文件夹名.</span></span><br><span class="line">$ hexo init blog</span><br><span class="line">$ <span class="built_in">cd</span> blog</span><br><span class="line">$ hexo g <span class="comment"># 等同于 hexo generate</span></span><br><span class="line">$ hexo s <span class="comment"># 等同于 hexo server</span></span><br><span class="line"><span class="comment"># 保持这个窗口不关闭, 在浏览器中输入地址 localhost:4000 查看当前网站雏形.</span></span><br></pre></td></tr></table></figure>
+<p>其他 Hexo 命令可以通过 <code>hexo help</code> 查看, 而具体命令有哪些参数可用可以通过 <code>hexo help [command]</code> (如 <code>hexo help generate</code>) 来查看, 当然可读性更高的方法还是从网上去查别人整理好的教程.</p>
+<h2 id="部署到-Github-Pages-Deployment"><a href="#部署到-Github-Pages-Deployment" class="headerlink" title="部署到 Github Pages / Deployment"></a>部署到 Github Pages / Deployment</h2><p>回到 Github 首页, 选择左侧栏一个绿色的 New 按钮新建仓库 (repository). 仓库名设置为 <code>[你的用户名].github.io</code>, 你的用户名参见 owner 下面显示的内容, 如果有大写就全部改成小写. 最后点击 Create repository 确认建立, 建立后进入仓库, 点击绿色按钮 <code>Clone or download</code>, 复制其中的地址.</p>
+<p>之前说到需要一个<strong>不是记事本</strong>的记事本工具, 因为之后我们经常需要打开 .yml 或者 .md 文件, 系统自带的记事本经常会出现不可知的问题, 所以建议下载一个 <a href="https://aka.ms/win32-x64-user-stable" target="_blank" rel="noopener">vscode</a>.</p>
+<h3 id="如果你是-vscode-用户"><a href="#如果你是-vscode-用户" class="headerlink" title="如果你是 vscode 用户"></a>如果你是 vscode 用户</h3><ol>
+<li><p>打开 vscode, 选择 <code>File &gt; Open Folder..</code>, 选中之前使用 hexo 生成的项目 (在当前例子中即选中之前的 blog 文件夹)</p>
+</li>
+<li><p>在左侧结构图中找到根目录下的 <code>_config.yml</code>, 双击打开, 找到最后一行, 在 <code>deploy</code> 后面增加如下内容:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:shinko1998/shinko1998.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<p> 其中, <code>repo</code> 行的内容就粘贴你刚刚复制的地址</p>
+</li>
+<li><p>解释一下部分个性化设置的内容:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line">title: <span class="comment"># 显示在浏览器标签栏上的内容</span></span><br><span class="line">subtitle:</span><br><span class="line">description: <span class="comment"># 类似于个人签名, 会在一些主题中显示</span></span><br><span class="line">keywords:</span><br><span class="line">author: <span class="comment"># 你的 id</span></span><br><span class="line">language: <span class="comment"># 语言, 根据不同的模板可以进行设置</span></span><br><span class="line">timezone:</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="如果你不是-vscode-用户"><a href="#如果你不是-vscode-用户" class="headerlink" title="如果你不是 vscode 用户"></a>如果你不是 vscode 用户</h3><p>随便用一个<strong>不是记事本</strong>的记事本工具打开 <code>_config.yml</code>, 重复以上操作</p>
+<p>此时如果你部署代码, 在 Git Bash 中执行如下命令:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d <span class="comment"># 等同于 hexo deploy</span></span><br></pre></td></tr></table></figure></p>
+<p>再从浏览器打开 <code>[你的用户名].github.io</code>, 就可以看到刚刚从本地看到的内容了.</p>
+<h2 id="付费内容-域名-Domain-Name"><a href="#付费内容-域名-Domain-Name" class="headerlink" title="付费内容-域名 / Domain Name"></a>付费内容-域名 / Domain Name</h2><p>以上的免费内容其实基本就够用了, 但是如果你想要一个更加个性化的域名, 比如 xxx.com, 就需要去购买域名了. 这里推荐使用<a href="https://www.aliyun.com/" target="_blank" rel="noopener">阿里云</a>.</p>
+<ol>
+<li><p>登录后找到域名注册, 输入你想要的域名, 比如我就输入了 shinko</p>
+</li>
+<li><p>找到一个价格合适且能备案的域名 (如果不能备案购物车里会提示), 点击立即结算, 选择购买年份, 选择域名持有者为个人, 然后选择<code>创建新的信息模板</code></p>
+</li>
+<li><p>创建模板是按顺序一步步走的, 创建好后需要验证邮箱并进行实名认证, 不作累述</p>
+</li>
+<li><p>回到之前的购买网页, 刷新并选择刚刚创建的模板, 点击下方立即购买, 付费过程不作累述</p>
+</li>
+<li><p>购买成功后进入域名控制台, 找到刚刚购买的域名, 点击右侧的<code>解析</code>, 点击<code>添加记录</code>, 增加两行内容:</p>
+<p> | 记录类型  | 主机记录 | 记录值 |<br> | ————— | —————-| —————-|<br> | A   | [留空]  | 185.199.109.153 |<br> | CNAME   | www   | [你的用户名].github.io |</p>
+<p> 上面那个 IPv4 地址可以通过在命令行 <code>ping [你的用户名].github.io</code> 得到.</p>
+</li>
+<li><p>添加好后再回到 Github 你刚刚添加的仓库中, 点击 <code>Settings</code>, 翻到最下面 <code>Github Pages</code>, 在 <code>Custom domain</code> 中填写你刚刚购买的域名并保存</p>
+</li>
+<li><p>打开一个<strong>不是记事本</strong>的记事本工具, 新建一个记事本, 在里面写上刚刚购买的域名, 不要加 www, 如我刚刚购买了 shinko.live, 则在记事本里填 shinko.live, 另存为 <code>CNAME</code>, 保存类型选择为所有文件 (即不添加任何后缀名)</p>
+</li>
+<li><p>回到 Git Bash, 在 blog 目录下 (如果你刚刚没有关, 那么直接继续即可, 如果你关掉过, 那么请先执行 <code>cd blog</code>) 顺次执行以下命令:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo g</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在浏览器输入你购买的域名, 查看是否效果和你刚刚在 <code>[你的用户名].github.io</code> 看到的一样, 如果显示 404, 那么打开你的 blog 文件夹, 删除里面最上面的 <code>.deploy_git/</code> 文件夹, 再次执行上一步中的三个命令</p>
+</li>
+</ol>
+<h2 id="更换主题-Themes"><a href="#更换主题-Themes" class="headerlink" title="更换主题 / Themes"></a>更换主题 / Themes</h2><p>当我们执行 <code>hexo init</code> 命令时, 会默认下载一个主题 <code>landscape</code>, 我们可以在<a href="https://hexo.io/themes/" target="_blank" rel="noopener">官方的主题库</a>里看看其他的主题. 这里我推荐 <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">NexT</a>, 因为使用它的人很多, 如果有问题也比较好查找相关的教程.</p>
+<ol>
+<li><p>执行如下命令将 NexT 下载到主题中的 next 文件夹中:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开 <code>_config.yml</code>, 找到 <code>theme</code> 行, 把 <code>landscape</code> 改成 <code>next</code>, 改完后效果如下:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>NexT 主题的详细使用方法可以参见<a href="https://theme-next.org/docs/" target="_blank" rel="noopener">官方文档</a>和其他教程.</p>
+<h2 id="编辑文章-Edit-Articles"><a href="#编辑文章-Edit-Articles" class="headerlink" title="编辑文章 / Edit Articles"></a>编辑文章 / Edit Articles</h2><p>新文章通过命令 <code>hexo new &quot;article_name&quot;</code> 来创建, 这样会自动创建一个标题为 <code>article_name</code> 的文章, 格式为 <code>.md</code>, 位于 <code>~\blog\source\_posts</code> 目录下.</p>
+<p><code>.md</code> 是 markdown 格式的后缀名, 回到我刚刚推荐使用 vscode 的原因, 在 vscode 中选择左上方有一个按钮 <code>Open Preview to the Side</code>, 就能在右侧同步显示编辑的 markdown 文档.</p>
+<p>就写作而言, 只需简单学会一些简单的 markdown 排版格式, 可以参见这个 <a href="https://github.com/guodongxiaren/README" target="_blank" rel="noopener">Github 仓库</a>.</p>
+<h2 id="上传图片-Upload-Pictures"><a href="#上传图片-Upload-Pictures" class="headerlink" title="上传图片 / Upload Pictures"></a>上传图片 / Upload Pictures</h2><p>对图手太太来说需要了解另外一个工具, 图床. 因为虽然我们可以将图片作为网站资源直接加载, 但是这样速度会很慢, 而且浪费资源. 这里推荐一个国内使用的图床, 可以参考<a href="https://juejin.im/post/5a71ac325188257350518a23" target="_blank" rel="noopener">这篇教程</a>.</p>
+<h2 id="完善细节-Perfect-Details"><a href="#完善细节-Perfect-Details" class="headerlink" title="完善细节 / Perfect Details"></a>完善细节 / Perfect Details</h2><h3 id="增加选项卡-More-Menu-Items"><a href="#增加选项卡-More-Menu-Items" class="headerlink" title="增加选项卡 / More Menu Items"></a>增加选项卡 / More Menu Items</h3><p>主题默认有归档页, 但是我们往往也需要 tags 和 categories 的功能, 那么可以通过以下步骤增加选项卡:</p>
+<ol>
+<li><p>首先在 Git Bash 中执行:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page <span class="string">"Tags"</span></span><br><span class="line">$ hexo new page <span class="string">"Categories"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开 <code>~\blog\source\Tags\index.md</code>, 在 <code>title</code> 下增加一行:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type: &quot;tags&quot;</span><br></pre></td></tr></table></figure>
+<p> 同理, 在 <code>~\blog\source\Categories\index.md</code> 下增加 <code>type: &quot;categories&quot;</code></p>
+</li>
+<li><p>打开 <code>~\blog\themes\next\_config.yml</code>, 查找 <code>Menu Settings</code>, 把 tags 和 categories 行前的井号 (<code>#</code>) 删除.</p>
+</li>
+<li><p>使用时仅需要在文章前增加两行就可以自动分类了, 比如我这篇文章前面的内容是这样的:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo + Github 搭建个人网站</span><br><span class="line">date: 2019-08-03 18:32:11</span><br><span class="line">tags: Hexo</span><br><span class="line">categories: Websites</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="原创许可协议-Creative-Commons"><a href="#原创许可协议-Creative-Commons" class="headerlink" title="原创许可协议 / Creative Commons"></a>原创许可协议 / Creative Commons</h3><p>原创作者的话应该都很熟悉 <a href="https://creativecommons.org/licenses/" target="_blank" rel="noopener">Creative Commons</a>, NexT 也支持在文章后面或者侧边栏增加许可协议.</p>
+<p>打开 <code>~\blog\_config.yml</code>, 搜索 <code>Creative Commons</code>, 修改以下项目:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">creative_commons:</span><br><span class="line">  license: by-nc-sa <span class="comment"># 你想要的协议, 具体可以在官网上查看</span></span><br><span class="line">  sidebar: <span class="literal">true</span> <span class="comment"># 侧边栏展示选项, 如果不要则设置为 false</span></span><br><span class="line">  post: <span class="literal">true</span> <span class="comment"># 每篇更新展示选项, 有一个位于 ~\blog\themes\next\layout\_partials\post\post-copyright.swig 的文件用于生成许可模板, 可以进行魔改使之显示成你需要的格式</span></span><br><span class="line">  language: <span class="comment"># 许可协议语言</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="显示预览-Preview"><a href="#显示预览-Preview" class="headerlink" title="显示预览 / Preview"></a>显示预览 / Preview</h3><p>首页默认显示全篇文章, 如果需要显示预览, 在 <code>~\blog\themes\next\_config.yml</code> 中搜索 <code>auto_excerpt</code> 修改如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">auto_excerpt:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  length: 150 <span class="comment"># 预览显示长度</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="其他功能-Other-Functions"><a href="#其他功能-Other-Functions" class="headerlink" title="其他功能 / Other Functions"></a>其他功能 / Other Functions</h3><p>可以参考<a href="https://segmentfault.com/a/1190000013660164" target="_blank" rel="noopener">这篇文章</a>.</p>
+<h3 id="BTW"><a href="#BTW" class="headerlink" title="BTW"></a>BTW</h3><p>记得每次写了新的文章之后都 <code>hexo g</code> + <code>hexo d</code>. 如果碰到无法更新的情况, 依旧和之前一样删除 <code>~\blog\.deploy_git\</code> 文件夹, 再 <code>hexo clean\</code> + <code>hexo g</code> + <code>hexo d</code>.</p>
+
+    </div>
+
+    
+    
+    
+      <div>
+        
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Shinko</li>
+  
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+
+      </div>
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+          
+        </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/2019/07/20/Asmodeus/" rel="next" title="费路 | Asmodeus / 阿斯蒙蒂斯">
+                <i class="fa fa-chevron-left"></i> 费路 | Asmodeus / 阿斯蒙蒂斯
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+              <a href="/2019/08/04/2020交大网安考研/" rel="prev" title="2020交大网安考研内容及大纲">
+                2020交大网安考研内容及大纲 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/shinko.jpg"
+      alt="Shinko">
+  <p class="site-author-name" itemprop="name">Shinko</p>
+  <div class="site-description motion-element" itemprop="description">I had a crush on them.</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/shinko1998" title="GitHub &rarr; https://github.com/shinko1998" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="/shinko199801@gmail.com" title="E-Mail &rarr; shinko199801@gmail.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://weibo.com/dye0229" title="Weibo &rarr; https://weibo.com/dye0229" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="http://shinko1998.lofter.com/" title="Lofter &rarr; http://shinko1998.lofter.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Lofter</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-准备工作-Preparation-for-Windows"><span class="nav-number">1.</span> <span class="nav-text">Windows 准备工作 / Preparation for Windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-配置-Git-Setting"><span class="nav-number">2.</span> <span class="nav-text">Git 配置 / Git Setting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Hexo-Installation-of-Hexo"><span class="nav-number">3.</span> <span class="nav-text">安装 Hexo / Installation of Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署到-Github-Pages-Deployment"><span class="nav-number">4.</span> <span class="nav-text">部署到 Github Pages / Deployment</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如果你是-vscode-用户"><span class="nav-number">4.1.</span> <span class="nav-text">如果你是 vscode 用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果你不是-vscode-用户"><span class="nav-number">4.2.</span> <span class="nav-text">如果你不是 vscode 用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#付费内容-域名-Domain-Name"><span class="nav-number">5.</span> <span class="nav-text">付费内容-域名 / Domain Name</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换主题-Themes"><span class="nav-number">6.</span> <span class="nav-text">更换主题 / Themes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑文章-Edit-Articles"><span class="nav-number">7.</span> <span class="nav-text">编辑文章 / Edit Articles</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上传图片-Upload-Pictures"><span class="nav-number">8.</span> <span class="nav-text">上传图片 / Upload Pictures</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完善细节-Perfect-Details"><span class="nav-number">9.</span> <span class="nav-text">完善细节 / Perfect Details</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#增加选项卡-More-Menu-Items"><span class="nav-number">9.1.</span> <span class="nav-text">增加选项卡 / More Menu Items</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原创许可协议-Creative-Commons"><span class="nav-number">9.2.</span> <span class="nav-text">原创许可协议 / Creative Commons</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示预览-Preview"><span class="nav-number">9.3.</span> <span class="nav-text">显示预览 / Preview</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他功能-Other-Functions"><span class="nav-number">9.4.</span> <span class="nav-text">其他功能 / Other Functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BTW"><span class="nav-number">9.5.</span> <span class="nav-text">BTW</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shinko</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="Symbols count total">143k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">2:10</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.3.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+  
+  <script src="/js/schemes/muse.js?v=7.3.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.3.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
